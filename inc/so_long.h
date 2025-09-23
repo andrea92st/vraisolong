@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:12:34 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/07/04 16:39:15 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/09/23 18:00:28 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,15 @@
 # include <stdlib.h> 
 # include <unistd.h>
 # include <stdio.h>
-# include <stdlib.h>
 # include <mlx.h>
 
 # define TILE_SIZE 32
-# define KEY_ESC 65037
+
+# define KEY_ESC 65307
 # define KEY_UP 119
 # define KEY_DOWN 115
 # define KEY_LEFT 97
 # define KEY_RIGHT 100
-
-typedef struct s_sprite_player {
-    void    *up;
-    void    *down;
-    void    *right;
-    void    *left;
-}   t_sprite_player;
 
 typedef struct s_game {
     void            *mlx;

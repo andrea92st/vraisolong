@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:23:05 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/07/04 16:48:28 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/09/23 17:45:19 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"so_long.h"
+#include "so_long.h"
 
 int check_player(char **map)
 {
