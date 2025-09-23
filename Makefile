@@ -2,29 +2,26 @@ NAME = so_long
 
 DIR 	=  src/
 
-FLAGS	= -Wall -Werror -Wextra
+FLAGS	= -Wall -Werror -Wextra -g3 -I. -I$(MLX_DIR)
 
-SRCS 	=	main.c \
-			so_long.h \
-			render_map.c \
-			get_next_line.c \
-			get_next_line_utils.c \
-			check_map.c \
-			flood_fill.c \
-			read_map.c \
-			mov.c \
-			utils.c \
-			free_game.c \
+SRCS 	=	src/main.c \
+			src/render_map.c \
+			src/get_next_line.c \
+			src/get_next_line_utils.c \
+			src/check_map.c \
+			src/flood_fill.c \
+			src/read_map.c \
+			src/mov.c \
+			src/utils.c \
+			src/free_game.c \
 
-MLX		 =		-lmlx -lXext -lX11
+MLX		 = -Lminilibx-linux -lmlx -lXext -lX11 -lm
 
 CC       =	    cc
 
-CFLAGS   =	    -Wall -Wextra -Werror -g3 -I./inc 
+CFLAGS   =      -Wall -Wextra -Werror -g3 -I. -Iminilibx-linux -Iinc
 
 OBJ_DIR	 =	    obj/
-
-SRCS     =      $(SRC)
 
 OBJ 	 =      $(patsubst src/%.c, $(OBJ_DIR)%.o, $(SRCS))
 
@@ -32,15 +29,18 @@ MAKE_DIR =      mkdir -p
 
 SMAKE	 =      make --no-print-directory
 
-$(OBJ_DIR)%.o:  src/%.c
+$(OBJ_DIR)%.o:  src/%.c so_long.h
 				@$(MAKE_DIR) $(dir $@)
 				@$(CC) $(CFLAGS) -c $< -o $@
 
 all:	        $(NAME)
 
-$(NAME):        $(OBJ)
-				@$(CC) $(CFLAGS) $(OBJ) -o $@ -lreadline
+$(NAME):        $(OBJ) minilibx-linux/libmlx.a
+				@$(CC) $(CFLAGS) $(OBJ) -o $@ $(MLX) -lreadline
 				@echo "\033[1;92m======== project compiled ========\033[0m"
+
+minilibx-linux/libmlx.a:
+	@$(MAKE) -C minilibx-linux
 
 clean:
 				@rm -rf $(OBJ_DIR)
