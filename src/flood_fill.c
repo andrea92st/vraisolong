@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:14:22 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/07/04 16:53:39 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/09/23 18:49:55 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,27 @@ char **copy_map(char **map)
     copy[i] = NULL;
     return (copy);
 }
-void flood_fill(char **map, int x, int y)
+static void fill(char **tab, int x, int y, char target, t_point size)
 {
-    if (map[y][x] == '1' || map[y][x] == 'X')
+    if(x < 0 || y < 0 || x >= size.x || y >= size.y)
         return;
-
-    if (map[y][x] != '0' && map[y][x] != 'C' 
-        && map[y][x] != 'E' && map[y][x] != 'P')
-        map[y][x] = 'X';
-    flood_fill(map, x + 1, y);
-    flood_fill(map, x - 1, y);
-    flood_fill(map, x, y + 1);
-    flood_fill(map, x, y - 1);
+    if(tab[y][x] != target)
+        return;
+    tab[y][x] = 'F';
+    fill(tab, x + 1, y, target, size);
+    fill(tab, x - 1, y, target, size);
+    fill(tab, x, y + 1, target, size);
+    fill(tab, x, y - 1, target, size);
 }
+
+void  flood_fill(char **tab, t_point size, t_point begin)
+{
+    char target = tab[begin.y][begin.x];
+    if(target == 'F')
+        return ;
+    fill(tab, begin.x, begin.y, target, size);
+}
+
 int check_map_solvable(char **map)
 {
     char    **map_copy;

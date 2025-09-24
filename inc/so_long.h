@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:12:34 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/09/23 18:00:28 by fio              ###   ########.fr       */
+/*   Updated: 2025/09/24 11:35:25 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h> 
 # include <unistd.h>
 # include <stdio.h>
-# include <mlx.h>
+# include <minilibx-linux/mlx.h>
 
 # define TILE_SIZE 32
 
@@ -26,6 +26,12 @@
 # define KEY_DOWN 115
 # define KEY_LEFT 97
 # define KEY_RIGHT 100
+
+# define TILE_WALL   '1'
+# define TILE_GROUND '0'
+# define TILE_PLAYER 'P'
+# define TILE_EXIT   'E'
+# define TILE_ITEM   'C'
 
 typedef struct s_game {
     void            *mlx;
@@ -36,15 +42,14 @@ typedef struct s_game {
     void            *wall_img;
     void            *ground_img;
 
-    t_sprite_player player;
     char            **map;
+    int             map_w;
+    int             mapp_h;
 
     int             player_x;
     int             player_y;
 
     int             collectibles;
-    int             anim_frame;
-    
     char             direction;
 }   t_game;
 
@@ -68,10 +73,15 @@ int     main (int argc, char **argv);
 void    create_game(t_game *game);
 int     gamberge(char **map);
 int     count_lines(char *file);
+int     handle_input(int keycode, t_game *game);
+void    move_player(t_game *game, int next_x, int next_y, char direction);
+void    exit_game(t_game *game);
 char    **read_map(char *file);
 void    load_assets(t_game *game);
 void	put_player_sprite(t_game *game, int px, int py);
 void    fill_tile(t_game *game, int x, int y, char tile);
 void    render_map(t_game *game);
+void	ft_putstr(char *s);
+void	*ft_memset(void *s, int c, size_t len);
 
 #endif
