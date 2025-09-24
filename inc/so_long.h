@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:12:34 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/09/24 11:35:25 by fio              ###   ########.fr       */
+/*   Updated: 2025/09/24 18:39:06 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ typedef struct s_game {
     void            *exit_img;
     void            *wall_img;
     void            *ground_img;
+    void            *player_img;
 
     char            **map;
     int             map_w;
-    int             mapp_h;
+    int             map_h;
 
     int             player_x;
     int             player_y;
