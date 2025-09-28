@@ -6,12 +6,13 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:00:33 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/09/24 19:20:49 by fio              ###   ########.fr       */
+/*   Updated: 2025/09/28 15:49:50 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
+/*
 static int gamberge(char **map)
 {
 	int check_count;
@@ -31,7 +32,7 @@ static int gamberge(char **map)
 	if (check_count > 0)
 		return (1);
 	return(0)
-}
+}*/
 
 static int count_lines(char *file)
 {
@@ -39,7 +40,7 @@ static int count_lines(char *file)
 	int		fd;
 	char	*tmp;
 
-	line += 0;
+	line = 0;
 	fd = open (file, O_RDONLY);
 	if (fd < 0)
 		return (-1);
@@ -60,22 +61,25 @@ char **read_map(char *file)
 
 	i = 0;
 	line = count_lines(file);
-	if (line == 0)
-		return (NULL);
-	map = (char *) malloc (sizeof (char *) * (line + 1));
-	if (map == NULL)
+	if (line <= 0)
 		return (NULL);
 	fd = open(file, O_RDONLY);
-	if (fd > 0)
-		return (-1);
+	if (fd == -1)
+		return (NULL);
+	map = malloc (sizeof (char *) * (line + 1));
+	if (map == NULL)
+	{
+		close(fd);
+		return (NULL);		
+	}
 	while(i < line)
 	{ 
 		map[i] = get_next_line(fd);
-		if (map[i] = NULL)
+		if (map[i] == NULL)
 			break;
 		i++;
 	}
-	map[i] == NULL;
+	map[i] = NULL;
 	close(fd);
 	return (map);
 }
