@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:36:12 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/09/28 15:53:57 by fio              ###   ########.fr       */
+/*   Updated: 2025/09/30 15:56:35 by anfiorit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int main(int argc, char **argv)
 	game.map = read_map(argv[1]);
 	if (!game.map)
 		return(0);
+	is_map_valid(&game);
 	init_len(&game);
 	h = game.map_h * TILE_SIZE;
 	w = game.map_w * TILE_SIZE;

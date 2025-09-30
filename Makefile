@@ -14,6 +14,7 @@ SRCS 	=	src/main.c \
 			src/mov.c \
 			src/utils.c \
 			src/free_game.c \
+			map_solvable.c \
 
 MLX		 = -Lminilibx-linux -lmlx -lXext -lX11 -lm
 
