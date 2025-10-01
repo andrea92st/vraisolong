@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:36:12 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/01 17:03:45 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/01 19:23:32 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main(int argc, char **argv)
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, w, h, "So long");
 	load_assets(&game);
-	render_map(&game);
+	//render_map(&game);
 	mlx_key_hook(game.win, handle_input, &game);
 	mlx_loop(game.mlx);
 	return(0);
