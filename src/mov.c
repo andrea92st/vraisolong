@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mov.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:40:31 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/07/07 16:42:06 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:50:02 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ void move_player(t_game *game, int x, int y, char direction)
     if (next_tile == '1')
         return;
     if (next_tile == 'C')
-        game->collectible--;
+        game->collectibles--;
     if (next_tile == 'E')
     {
-        if (game->collectible != 0)
+        if (game->collectibles != 0)
             return;
         exit_game(game);
     }

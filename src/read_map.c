@@ -6,35 +6,13 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:00:33 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/09/28 15:49:50 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/01 18:07:42 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*
-static int gamberge(char **map)
-{
-	int check_count;
-
-	check_count = 0;
-
-	if (check_wall(**map) == 1)
-		check_count++;
-	if (check_exit(**map) == 1)
-		check_count++;
-	if (check_player(**map) == 1)
-		check_count++;
-	if (check_item(**map) == 1)
-		check_count++;
-	if (check_ground(**map) == 1)
-		check_count++;
-	if (check_count > 0)
-		return (1);
-	return(0)
-}*/
-
-static int count_lines(char *file)
+int count_lines(char *file)
 {
 	int		line;
 	int		fd;

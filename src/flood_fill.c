@@ -3,66 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:14:22 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/09/30 15:59:47 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/10/01 17:56:11 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void fill(char **tab, int x, int y, char target, t_point size)
+static void fill(char **tab, int x, int y, t_game *game)
 {
-    if(x < 0 || y < 0 || x >= size.x || y >= size.y)
+	if (x < 0 || y < 0 || x >= game->map_w || y >= game->map_h)
+		return;
+	if (tab[y][x] == '1' || tab[y][x] == 'F')
         return;
-    if(tab[y][x] != target)
-        return;
-    tab[y][x] = 'F';
-    fill(tab, x + 1, y, target, size);
-    fill(tab, x - 1, y, target, size);
-    fill(tab, x, y + 1, target, size);
-    fill(tab, x, y - 1, target, size);
+	if(tab[y][x] == 'E')
+	{
+		game->exit_found = 1;
+		return ;
+	}
+	if (tab[y][x] == '0' || tab[y][x] == 'C' || tab[y][x] == 'P')
+	{
+		tab[y][x] = 'F';
+		fill(tab, x + 1, y, game);
+		fill(tab, x - 1, y, game);
+		fill(tab, x, y + 1, game);
+		fill(tab, x, y - 1, game);
+	}
 }
 
-void  flood_fill(char **tab)
+void  flood_fill(char **tab, t_game *game)
 {
-    char target = tab[begin.y][begin.x];
-    if(target == 'F')
-        return ;
-    fill(tab, begin.x, begin.y, target, size);
-}
-
-int check_map_solvable(char **map)
-{
-    char    **map_copy;
-    int     y;
-    int     x;
-
-    y = 0;
-    map_copy = copy_map(map);
-    while (map_copy[y])
-    {
-        x = 0;
-        while (map_copy[y][x])
-        {
-            if(map_copy[y][x] == 'P')
-                flood_fill(map_copy, x, y);
-            x++;
-        }
-        y++;
-    }
-    y = 0;
-    while (map_copy[y])
-    {
-        x = 0;
-        while (map_copy[y][x])
-        {
-            if(map_copy[y][x] == 'C' || map_copy[y][x] == 'E')
-                return (1);
-            x++;
-        }
-        y++;
-    }
-    return (0); 
+	game->exit_found = 0;
+	fill(tab, game->player_x, game->player_y, game);
 }

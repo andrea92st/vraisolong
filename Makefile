@@ -14,7 +14,7 @@ SRCS 	=	src/main.c \
 			src/mov.c \
 			src/utils.c \
 			src/free_game.c \
-			map_solvable.c \
+			src/map_solvable.c \
 
 MLX		 = -Lminilibx-linux -lmlx -lXext -lX11 -lm
 
@@ -30,14 +30,14 @@ MAKE_DIR =      mkdir -p
 
 SMAKE	 =      make --no-print-directory
 
-$(OBJ_DIR)%.o:  src/%.c so_long.h
+$(OBJ_DIR)%.o:  src/%.c inc/so_long.h
 				@$(MAKE_DIR) $(dir $@)
 				@$(CC) $(CFLAGS) -c $< -o $@
 
 all:	        $(NAME)
 
 $(NAME):        $(OBJ) minilibx-linux/libmlx.a
-				@$(CC) $(CFLAGS) $(OBJ) -o $@ $(MLX) -lreadline
+				@$(CC) $(CFLAGS) $(OBJ) -o $@ $(MLX)
 				@echo "\033[1;92m======== project compiled ========\033[0m"
 
 minilibx-linux/libmlx.a:

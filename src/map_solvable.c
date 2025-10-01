@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_solvable.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:55:18 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/09/30 16:03:44 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/10/01 18:08:29 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,18 @@ void is_map_valid(t_game *game)
 		map_not_valid(map);
 	if(check_wall(map) != 0)
 		map_not_valid(map);
-	find_pos_player(map, &game);
-	if(flood_fill(map) != 1)
+	find_pos_player(map, game);
+	flood_fill(map, game);
+    if(game->exit_found == 0)
 		map_not_valid(map);
 }
 
-int find_pos_player(char **map, t_game *game)
+void    find_pos_player(char **map, t_game *game)
 {
 	
     int x;
     int y;
-    int count;
 
-    count = 0;
     y = 0;
     while (map[y])
     {
@@ -67,12 +66,14 @@ int find_pos_player(char **map, t_game *game)
         while(map[y][x])
         {
             if (map[y][x] == 'P')
-                count++;
+            {
+                game->player_x = x;
+                game->player_y = y;
+            }
             x++;
         }
         y++;
     }
-    return(count);
 }
 
 void map_not_valid(char **map)
@@ -80,17 +81,4 @@ void map_not_valid(char **map)
 	free_map(map);
 	write(1, "Error, map non valide", 22);
 	exit(EXIT_FAILURE);
-}
-
-void	free_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
 }

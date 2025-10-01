@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:12:34 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/09/24 18:39:06 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/01 18:07:47 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,13 @@
 # include <minilibx-linux/mlx.h>
 
 # define TILE_SIZE 32
+# define BUFFER_SIZE 42
 
 # define KEY_ESC 65307
-# define KEY_UP 119
-# define KEY_DOWN 115
-# define KEY_LEFT 97
-# define KEY_RIGHT 100
+# define KEY_W 119
+# define KEY_S 115
+# define KEY_A 97
+# define KEY_D 100
 
 # define TILE_WALL   '1'
 # define TILE_GROUND '0'
@@ -49,6 +50,7 @@ typedef struct s_game {
 
     int             player_x;
     int             player_y;
+    int             exit_found;
 
     int             collectibles;
     char             direction;
@@ -59,8 +61,7 @@ int     check_exit(char **map);
 int     check_wall(char **map);
 int     check_item(char **map);
 char    **copy_map(char **map);
-void    flood_fill(char **map, int x, int y);
-int     check_map_solvable(char **map);
+void    flood_fill(char **map, t_game *game);
 size_t	ft_strlen(const char *str);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strdup(const char *src);
@@ -72,7 +73,6 @@ char	*ft_create_line(char **ptr_stash, char **ptr_buffer, ssize_t count);
 char	*get_next_line(int fd);
 int     main (int argc, char **argv);
 void    create_game(t_game *game);
-int     gamberge(char **map);
 int     count_lines(char *file);
 int     handle_input(int keycode, t_game *game);
 void    move_player(t_game *game, int next_x, int next_y, char direction);
@@ -84,5 +84,10 @@ void    fill_tile(t_game *game, int x, int y, char tile);
 void    render_map(t_game *game);
 void	ft_putstr(char *s);
 void	*ft_memset(void *s, int c, size_t len);
+void    is_map_valid(t_game *game);
+void    init_len(t_game *game);
+void    find_pos_player(char **map, t_game *game);
+void    map_not_valid(char **map);
+void    free_map(char **map);
 
 #endif

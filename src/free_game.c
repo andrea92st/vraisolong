@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:45:06 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/09/24 18:44:09 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/01 17:55:13 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void exit_game(t_game *game)
 	mlx_destroy_image(game->mlx, game->item_img);
 	mlx_destroy_window(game->mlx, game->win);
 	mlx_destroy_display(game->mlx);
-	free_map(game->map);
+	free(game->map);
 	free(game->mlx);
 	exit(0);
 }
