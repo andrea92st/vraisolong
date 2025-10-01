@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:40:31 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/01 17:50:02 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/01 21:40:50 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void move_player(t_game *game, int x, int y, char direction)
     {
         if (game->collectibles != 0)
             return;
+        ft_putstr("gg c win\n");
         exit_game(game);
     }
     game->map[game->player_y][game->player_x] = '0';
@@ -53,4 +54,7 @@ void move_player(t_game *game, int x, int y, char direction)
     game->player_x = next_x;
     game->player_y = next_y;
     game->direction = direction;
+    game->moves++;
+    ft_putnbr(game->moves);
+    ft_putstr("\n"); 
 }

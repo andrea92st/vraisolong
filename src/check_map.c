@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:23:05 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/09/30 16:01:28 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/10/01 21:23:19 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int check_exit (char **map)
     return(count);
 }
 
-int check_item(char **map)
+int check_item(char **map, t_game *game)
 {
     int y;
     int x;
@@ -70,7 +70,10 @@ int check_item(char **map)
         while(map[y][x])
         {        
             if (map[y][x] == 'C')
+            {
                 count++;
+                game->collectibles++;
+            }
             x++;
         }
         y++;

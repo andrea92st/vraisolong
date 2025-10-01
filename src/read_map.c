@@ -6,11 +6,46 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:00:33 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/01 18:07:42 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/01 20:43:29 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+static void delete_eol(char *s)
+{
+	int	i;
+
+	i = 0;
+	while(s[i])
+	{
+		if (s[i] == '\n')
+			s[i] = '\0';
+		i++;
+	}	
+}
+
+static int is_map_rectangular(char **map)
+{
+	int	i;
+	int	h;
+	int	len;
+
+	len = 0;
+	while(map[0][len])
+		len++;
+	h = 1;
+	while(map[h])
+	{
+		i = 0;
+		while(map[h][i])
+			i++;
+		if (i != len)
+			return (1);
+		h++;
+	}
+	return (0);
+}
 
 int count_lines(char *file)
 {
@@ -55,9 +90,13 @@ char **read_map(char *file)
 		map[i] = get_next_line(fd);
 		if (map[i] == NULL)
 			break;
+		delete_eol(map[i]);
 		i++;
 	}
 	map[i] = NULL;
 	close(fd);
+	if(is_map_rectangular(map) == 1)
+		map_not_valid(map);
 	return (map);
 }
+

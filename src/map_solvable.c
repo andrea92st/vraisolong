@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:55:18 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/01 18:08:29 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/01 21:23:48 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void is_map_valid(t_game *game)
 	map = copy_map(game->map);
 	if(check_exit(map) != 1)
 		map_not_valid(map);
-	if(check_item(map) == 0)
+	if(check_item(map, game) == 0)
 		map_not_valid(map);
 	if(check_player(map) != 1)
 		map_not_valid(map);

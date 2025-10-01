@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:12:34 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/01 18:07:47 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/01 21:35:46 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdio.h>
 # include <minilibx-linux/mlx.h>
 
-# define TILE_SIZE 32
+# define TILE_SIZE 128
 # define BUFFER_SIZE 42
 
 # define KEY_ESC 65307
@@ -35,31 +35,32 @@
 # define TILE_ITEM   'C'
 
 typedef struct s_game {
-    void            *mlx;
-    void            *win;
-    
-    void            *item_img;
-    void            *exit_img;
-    void            *wall_img;
-    void            *ground_img;
-    void            *player_img;
+	void            *mlx;
+	void            *win;
+	
+	void            *item_img;
+	void            *exit_img;
+	void            *wall_img;
+	void            *ground_img;
+	void            *player_img;
 
-    char            **map;
-    int             map_w;
-    int             map_h;
+	char            **map;
+	int             map_w;
+	int             map_h;
 
-    int             player_x;
-    int             player_y;
-    int             exit_found;
+	int             player_x;
+	int             player_y;
+	int             exit_found;
 
-    int             collectibles;
-    char             direction;
+	int              moves;
+	int             collectibles;
+	char             direction;
 }   t_game;
 
 int     check_player(char **map);
 int     check_exit(char **map);
 int     check_wall(char **map);
-int     check_item(char **map);
+int     check_item(char **map, t_game *game);
 char    **copy_map(char **map);
 void    flood_fill(char **map, t_game *game);
 size_t	ft_strlen(const char *str);
@@ -83,6 +84,7 @@ void	put_player_sprite(t_game *game, int px, int py);
 void    fill_tile(t_game *game, int x, int y, char tile);
 void    render_map(t_game *game);
 void	ft_putstr(char *s);
+void	ft_putnbr(int n);
 void	*ft_memset(void *s, int c, size_t len);
 void    is_map_valid(t_game *game);
 void    init_len(t_game *game);
