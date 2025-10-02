@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 13:36:12 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/02 20:31:46 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/02 22:56:38 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr("error, donne map valid\n");
+		ft_putstr("Error\n choissisez une map\n");
 		return (0);
 	}
 	ft_memset(&game, 0, sizeof(t_game));

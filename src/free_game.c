@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:45:06 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/02 19:55:15 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/02 22:55:15 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	map_not_valid(char **map, t_game *game)
 {
 	free_map(map);
 	get_next_line(-1);
-	write(1, "Error, map non valide", 22);
+	write(1, "Error\n, map non valide\n", 24);
 	if (game && game->map)
 	{
 		free_map(game->map);
