@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:11:10 by fio               #+#    #+#             */
-/*   Updated: 2025/10/02 16:49:11 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/02 22:20:09 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,28 +80,41 @@ char	*get_next_line(int fd)
 
 	if (fd == -1)
 	{
-    	free(stash);
-    	stash = NULL;
-    	return NULL;
+		free(stash);
+		stash = NULL;
+		return (NULL);
 	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
+	count_read = gnl_fill_stash(fd, &stash);
+	if (count_read == -1)
+		return (NULL);
 	buffer = NULL;
+	return (ft_create_line(&stash, &buffer, count_read));
+}
+
+ssize_t	gnl_fill_stash(int fd, char **stash)
+{
+	char	*buffer;
+	ssize_t	count_read;
+
 	count_read = 1;
-	while (count_read != 0)
+	while (count_read != 0 && (!*stash || ft_strchr(*stash, '\n') == NULL))
 	{
-		if (stash && ft_strchr(stash, '\n') != NULL)
-			return (ft_create_line(&stash, &buffer, count_read));
 		buffer = (char *) malloc (BUFFER_SIZE + 1);
 		if (buffer == NULL)
-			return (NULL);
+			return (-1);
 		count_read = read(fd, buffer, BUFFER_SIZE);
 		if (count_read <= 0)
+		{
+			free(buffer);
 			break ;
+		}
 		buffer[count_read] = '\0';
-		stash = ft_build(stash, buffer);
+		*stash = ft_build(*stash, buffer);
 		free(buffer);
-		buffer = NULL;
+		if (*stash == NULL)
+			return (-1);
 	}
-	return (ft_create_line(&stash, &buffer, count_read));
+	return (count_read);
 }

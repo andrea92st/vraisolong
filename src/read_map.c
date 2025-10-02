@@ -6,39 +6,39 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:00:33 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/02 18:24:12 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/02 21:56:09 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static void delete_eol(char *s)
+static void	delete_eol(char *s)
 {
 	int	i;
 
 	i = 0;
-	while(s[i])
+	while (s[i])
 	{
 		if (s[i] == '\n')
 			s[i] = '\0';
 		i++;
-	}	
+	}
 }
 
-int is_map_rectangular(char **map)
+int	is_map_rectangular(char **map)
 {
 	int	i;
 	int	h;
 	int	len;
 
 	len = 0;
-	while(map[0][len])
+	while (map[0][len])
 		len++;
 	h = 1;
-	while(map[h])
+	while (map[h])
 	{
 		i = 0;
-		while(map[h][i])
+		while (map[h][i])
 			i++;
 		if (i != len)
 			return (1);
@@ -47,7 +47,7 @@ int is_map_rectangular(char **map)
 	return (0);
 }
 
-int count_lines(char *file)
+int	count_lines(char *file)
 {
 	int		line;
 	int		fd;
@@ -57,21 +57,24 @@ int count_lines(char *file)
 	fd = open (file, O_RDONLY);
 	if (fd < 0)
 		return (-1);
-	while ((tmp = get_next_line(fd)) != NULL)
+	tmp = get_next_line(fd);
+	while (tmp != NULL)
 	{
 		line++;
 		free(tmp);
+		tmp = get_next_line(fd);
 	}
 	close(fd);
 	get_next_line(-1);
-	return(line);
+	return (line);
 }
-char **read_map(char *file)
+
+char	**read_map(char *file)
 {
-	int     line;
-	char    **map;
-	int     fd;
-	int     i;
+	int		line;
+	char	**map;
+	int		fd;
+	int		i;
 
 	i = 0;
 	line = count_lines(file);
@@ -84,19 +87,23 @@ char **read_map(char *file)
 	if (map == NULL)
 	{
 		close(fd);
-		return (NULL);		
+		return (NULL);
 	}
-	while(i < line)
-	{ 
+	read_map2(fd, map, line, i);
+	return (map);
+}
+
+void	read_map2(int fd, char **map, int line, int i)
+{
+	while (i < line)
+	{
 		map[i] = get_next_line(fd);
 		if (map[i] == NULL)
-			break;
+			break ;
 		delete_eol(map[i]);
 		i++;
 	}
 	map[i] = NULL;
 	close(fd);
 	get_next_line(-1);
-	return (map);
 }
-

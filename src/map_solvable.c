@@ -6,17 +6,17 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:55:18 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/02 18:42:52 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/02 20:55:22 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char **copy_map(char **map)
+char	**copy_map(char **map)
 {
-	int     i;
-	int     y;
-	char    **copy;
+	int		i;
+	int		y;
+	char	**copy;
 
 	y = 0;
 	while (map[y])
@@ -34,10 +34,11 @@ char **copy_map(char **map)
 	return (copy);
 }
 
-void is_map_valid(t_game *game)
+void	is_map_valid(t_game *game)
 {
 	char	**map;
 
+	init_len(game);
 	map = copy_map(game->map);
 	if (check_exit(map) != 1)
 		map_not_valid(map, game);
@@ -47,26 +48,25 @@ void is_map_valid(t_game *game)
 		map_not_valid(map, game);
 	if (check_wall(map) != 0)
 		map_not_valid(map, game);
-	if(is_map_rectangular(map) == 1 || is_map_allowed(map) == 0)
+	if (is_map_rectangular(map) == 1 || is_map_allowed(map) == 0)
 		map_not_valid(map, game);
 	find_pos_player(map, game);
 	flood_fill(map, game);
-	if(game->exit_found == 0 || game->counts != game->collectibles)
+	if (game->exit_found == 0 || game->counts != game->collectibles)
 		map_not_valid(map, game);
 	free_map(map);
 }
 
-void    find_pos_player(char **map, t_game *game)
+void	find_pos_player(char **map, t_game *game)
 {
-	
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (map[y])
 	{
 		x = 0;
-		while(map[y][x])
+		while (map[y][x])
 		{
 			if (map[y][x] == 'P')
 			{
@@ -79,18 +79,6 @@ void    find_pos_player(char **map, t_game *game)
 	}
 }
 
-void map_not_valid(char **map, t_game *game)
-{
-	free_map(map);
-	get_next_line(-1);
-	write(1, "Error, map non valide", 22);
-	if (game && game->map)
-	{
-		free_map(game->map);
-		game->map = NULL;
-	}
-	exit(EXIT_FAILURE);
-}
 int	is_map_allowed(char **map)
 {
 	int	x;
@@ -98,12 +86,12 @@ int	is_map_allowed(char **map)
 
 	x = 0;
 	y = 0;
-	while(map[y])
+	while (map[y])
 	{
 		x = 0;
-		while(map[y][x])
+		while (map[y][x])
 		{
-			if(is_char_allowed(map[y][x]) == 0)
+			if (is_char_allowed(map[y][x]) == 0)
 				return (0);
 			x++;
 		}
@@ -112,10 +100,9 @@ int	is_map_allowed(char **map)
 	return (1);
 }
 
-
 int	is_char_allowed(char c)
 {
-	if(c == 'P' ||c == 'C' ||c == '1' ||c == '0' ||c == 'E')
-		return(1);
-	return(0);
+	if (c == 'P' || c == 'C' || c == '1' || c == '0' || c == 'E')
+		return (1);
+	return (0);
 }

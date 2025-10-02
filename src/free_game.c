@@ -6,13 +6,13 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/04 16:45:06 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/02 16:31:42 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/02 19:55:15 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void exit_game(t_game *game)
+void	exit_game(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->wall_img);
 	mlx_destroy_image(game->mlx, game->ground_img);
@@ -25,7 +25,8 @@ void exit_game(t_game *game)
 	free(game->mlx);
 	exit(0);
 }
-void free_map(char **map)
+
+void	free_map(char **map)
 {
 	int	i;
 
@@ -36,4 +37,17 @@ void free_map(char **map)
 		i++;
 	}
 	free(map);
+}
+
+void	map_not_valid(char **map, t_game *game)
+{
+	free_map(map);
+	get_next_line(-1);
+	write(1, "Error, map non valide", 22);
+	if (game && game->map)
+	{
+		free_map(game->map);
+		game->map = NULL;
+	}
+	exit(EXIT_FAILURE);
 }
