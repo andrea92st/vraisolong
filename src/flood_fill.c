@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 12:14:22 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/01 17:56:11 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/02 17:56:42 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ static void fill(char **tab, int x, int y, t_game *game)
 		game->exit_found = 1;
 		return ;
 	}
+	if (tab[y][x] == 'C')
+        game->counts++;
 	if (tab[y][x] == '0' || tab[y][x] == 'C' || tab[y][x] == 'P')
 	{
 		tab[y][x] = 'F';
@@ -36,5 +38,6 @@ static void fill(char **tab, int x, int y, t_game *game)
 void  flood_fill(char **tab, t_game *game)
 {
 	game->exit_found = 0;
+	game->counts = 0;
 	fill(tab, game->player_x, game->player_y, game);
 }

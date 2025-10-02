@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:00:33 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/02 16:55:55 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/02 18:24:12 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void delete_eol(char *s)
 	}	
 }
 
-static int is_map_rectangular(char **map)
+int is_map_rectangular(char **map)
 {
 	int	i;
 	int	h;
@@ -97,8 +97,6 @@ char **read_map(char *file)
 	map[i] = NULL;
 	close(fd);
 	get_next_line(-1);
-	if(is_map_rectangular(map) == 1)
-		map_not_valid(map);
 	return (map);
 }
 

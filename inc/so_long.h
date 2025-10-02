@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:12:34 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/01 21:35:46 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/02 18:38:16 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_game {
 	int             exit_found;
 
 	int              moves;
+	int				counts;
 	int             collectibles;
 	char             direction;
 }   t_game;
@@ -89,7 +90,10 @@ void	*ft_memset(void *s, int c, size_t len);
 void    is_map_valid(t_game *game);
 void    init_len(t_game *game);
 void    find_pos_player(char **map, t_game *game);
-void    map_not_valid(char **map);
+void    map_not_valid(char **map, t_game *game);
 void    free_map(char **map);
+int		is_map_allowed(char **map);
+int		is_char_allowed(char c);
+int		is_map_rectangular(char **map);
 
 #endif
