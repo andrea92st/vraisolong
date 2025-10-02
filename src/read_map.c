@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 18:00:33 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/01 20:43:29 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/02 16:55:55 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int count_lines(char *file)
 		free(tmp);
 	}
 	close(fd);
+	get_next_line(-1);
 	return(line);
 }
 char **read_map(char *file)
@@ -95,6 +96,7 @@ char **read_map(char *file)
 	}
 	map[i] = NULL;
 	close(fd);
+	get_next_line(-1);
 	if(is_map_rectangular(map) == 1)
 		map_not_valid(map);
 	return (map);

@@ -6,7 +6,7 @@
 /*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 15:55:18 by anfiorit          #+#    #+#             */
-/*   Updated: 2025/10/01 21:23:48 by fio              ###   ########.fr       */
+/*   Updated: 2025/10/02 16:33:39 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void is_map_valid(t_game *game)
 	flood_fill(map, game);
     if(game->exit_found == 0)
 		map_not_valid(map);
+    free_map(map);
 }
 
 void    find_pos_player(char **map, t_game *game)

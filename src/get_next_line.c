@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anfiorit <anfiorit@student.42.fr>          +#+  +:+       +#+        */
+/*   By: fio <fio@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 17:11:10 by fio               #+#    #+#             */
-/*   Updated: 2025/06/18 19:26:15 by anfiorit         ###   ########.fr       */
+/*   Updated: 2025/10/02 16:49:11 by fio              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,12 @@ char	*get_next_line(int fd)
 	char		*buffer;
 	ssize_t		count_read;
 
+	if (fd == -1)
+	{
+    	free(stash);
+    	stash = NULL;
+    	return NULL;
+	}
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	buffer = NULL;
